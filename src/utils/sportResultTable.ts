@@ -1,6 +1,6 @@
 import { Chalk } from "chalk";
 import stripAnsi from "strip-ansi";
-import {logger} from "chalk-logger-prettier";
+import {logger} from "chalk-prettier";
 
 const chalk = new Chalk({
   level: process.env.NO_COLOR ? 0 : 3
