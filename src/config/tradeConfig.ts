@@ -13,6 +13,14 @@ function bool(v: string | undefined, d: boolean): boolean {
 }
 
 export type LeaderFeedMode = "rest" | "clob_user_ws";
+export type GeoblockMode = "enforce" | "warn" | "off";
+
+function geoblockMode(v: string | undefined): GeoblockMode {
+  const s = String(v ?? "").trim().toLowerCase();
+  if (s === "off" || s === "false" || s === "0" || s === "disabled") return "off";
+  if (s === "warn" || s === "ignore" || s === "log") return "warn";
+  return "enforce";
+}
 
 export const tradeConfig = {
   copyRatio: num(process.env.COPY_RATIO, 0.1),
@@ -28,6 +36,7 @@ export const tradeConfig = {
   gammaApiHost: process.env.GAMMA_API_HOST || POLYMARKET_URLS.gammaApi,
   sportsOnly: bool(process.env.SPORTS_ONLY, true),
   geoblockEnabled: bool(process.env.GEOBLOCK_ENABLED, true),
+  geoblockMode: geoblockMode(process.env.GEOBLOCK_MODE),
   leaderFeed: ((): LeaderFeedMode => {
     const v = (process.env.LEADER_FEED || "rest").toLowerCase();
     return v === "clob_user_ws" || v === "wss" || v === "user_ws" ? "clob_user_ws" : "rest";

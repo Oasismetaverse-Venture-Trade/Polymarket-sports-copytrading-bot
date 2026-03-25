@@ -62,7 +62,12 @@ export async function validateTradingPrerequisites(): Promise<void> {
     const g = await fetchGeoblockStatus();
     logger.info({ blocked: g.blocked, country: g.country, region: g.region }, "geoblock");
     if (g.blocked) {
-      throw new Error(`order placement blocked for region ${g.country} ${g.region}`);
+      const msg = `order placement blocked for region ${g.country} ${g.region}`;
+      if (tradeConfig.geoblockMode === "warn") {
+        logger.warn({ blocked: g.blocked, country: g.country, region: g.region }, msg);
+      } else {
+        throw new Error(msg);
+      }
     }
   }
   const st = tradeConfig.signatureType;
