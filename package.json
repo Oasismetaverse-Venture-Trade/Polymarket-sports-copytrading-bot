@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "npx tsc",
-    "start": "nsx tsc && node dist/index.js",
+    "start": "npx tsc && node dist/index.js",
     "dev": "npx ts-node src/index.ts",
     "watch": "npx tsc --watch",
     "example:basic": "npx ts-node examples/basic-usage.ts",
