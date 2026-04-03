@@ -1,4 +1,4 @@
-# Polymarket Copy Trading Bot
+# Polymarket Sports Copy Trading Bot
 
 TypeScript bot that **monitors a Polymarket address** and can optionally **copy its open positions** by placing matching BUY/SELL orders via the Polymarket CLOB client.
 
